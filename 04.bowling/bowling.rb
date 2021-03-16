@@ -4,7 +4,6 @@
 score = ARGV[0]
 scores = score.split(',')
 shots = []
-frames = []
 
 scores.each do |s|
   case s
@@ -18,14 +17,12 @@ scores.each do |s|
   end
 end
 
-shots.each_slice(2) do |s|
-  frames << s
-end
+frames = []
+frames = shots.each_slice(2).to_a
 
 point = 0
-i = 0
 
-while frames.length
+frames.each_with_index do |_, i|
   point += \
     if i < 9
       # turkey or double strike
@@ -42,8 +39,6 @@ while frames.length
     else # 10 frame
       frames[i].sum
     end
-  i += 1
-  break if i == frames.length
 end
 
 p point
