@@ -26,6 +26,9 @@ def main(options)
   # option -a の処理
   files = options.has?(:a) ? Dir.glob('*', File::FNM_DOTMATCH).sort : Dir.glob(['*']).sort
 
+  # ファイル総数が0ならメソッドから抜ける
+  return if files.count.zero?
+
   # option -r の処理
   files = files.reverse if options.has?(:r)
 
@@ -103,6 +106,9 @@ end
 
 # カラム幅を調整し、ファイルを3列で表示させる
 def pass_no_option(files)
+  # ファイル総数が1の場合
+  return puts files if files.count == 1
+
   # 1列に表示するファイル数を算出する
   file_count = (files.count % 3).zero? ? files.count / 3 : files.count / 3 + 1
 
