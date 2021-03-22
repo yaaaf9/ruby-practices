@@ -24,7 +24,7 @@ end
 
 def main(options)
   # option -a の処理
-  files = options.has?(:a) ? Dir.glob('*', File::FNM_DOTMATCH).sort : Dir.glob(['*']).sort
+  files = options.has?(:a) ? Dir.glob('*', File::FNM_DOTMATCH) : Dir.glob(['*'])
   sorted_files = files.sort
 
   # ファイル総数が0ならメソッドから抜ける
