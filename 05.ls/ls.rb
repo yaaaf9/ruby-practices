@@ -25,15 +25,16 @@ end
 def main(options)
   # option -a の処理
   files = options.has?(:a) ? Dir.glob('*', File::FNM_DOTMATCH).sort : Dir.glob(['*']).sort
+  sorted_files = files.sort
 
   # ファイル総数が0ならメソッドから抜ける
-  return if files.count.zero?
+  return if sorted_files.count.zero?
 
   # option -r の処理
-  files = files.reverse if options.has?(:r)
+  sorted_files = sorted_files.reverse if options.has?(:r)
 
   # option -l または option無しの処理
-  options.has?(:l) ? arrange_file(examine_file_attributes(files)) : pass_no_option(files)
+  options.has?(:l) ? arrange_file(examine_file_attributes(sorted_files)) : pass_no_option(sorted_files)
 end
 
 # ファイルモードを変換する
